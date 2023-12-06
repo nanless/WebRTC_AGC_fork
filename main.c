@@ -153,9 +153,10 @@ int agcProcess(int16_t *buffer, uint32_t sampleRate, size_t samplesCount, int16_
     if (buffer == nullptr) return -1;
     if (samplesCount == 0) return -1;
     WebRtcAgcConfig agcConfig;
-    agcConfig.compressionGaindB = 9; // default 9 dB
+    agcConfig.compressionGaindB = 10; // default 9 dB
     agcConfig.limiterEnable = 1; // default kAgcTrue (on)
-    agcConfig.targetLevelDbfs = 3; // default 3 (-3 dBOv)
+    // agcConfig.limiterEnable = 0;
+    agcConfig.targetLevelDbfs = 8; // default 3 (-3 dBOv)
     int minLevel = 0;
     int maxLevel = 255;
     size_t samples = MIN(160, sampleRate / 100);
@@ -236,7 +237,8 @@ void auto_gain(char *in_file, char *out_file) {
         //  kAgcModeFixedDigital 固定增益
         double startTime = now();
 
-        agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeAdaptiveDigital);
+        // agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeAdaptiveDigital);
+        agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeFixedDigital);
 
         double elapsed_time = calcElapsed(startTime, now());
 
@@ -250,19 +252,19 @@ int main(int argc, char *argv[]) {
     printf("WebRTC Automatic Gain Control\n");
     printf("博客:http://cpuimage.cnblogs.com/\n");
     printf("音频自动增益\n");
-    if (argc < 2)
+    if (argc < 3)
         return -1;
     char *in_file = argv[1];
-    char drive[3];
-    char dir[256];
-    char fname[256];
-    char ext[256];
-    char out_file[1024];
-    splitpath(in_file, drive, dir, fname, ext);
-    sprintf(out_file, "%s%s%s_out%s", drive, dir, fname, ext);
+    char *out_file = argv[2];
+    // char drive[3];
+    // char dir[256];
+    // char fname[256];
+    // char ext[256];
+    // splitpath(in_file, drive, dir, fname, ext);
+    // sprintf(out_file, "%s%s%s_out%s", drive, dir, fname, ext);
     auto_gain(in_file, out_file);
 
-    printf("按任意键退出程序 \n");
-    getchar();
+    // printf("按任意键退出程序 \n");
+    // getchar();
     return 0;
 }
