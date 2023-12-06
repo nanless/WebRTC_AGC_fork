@@ -237,8 +237,8 @@ void auto_gain(char *in_file, char *out_file) {
         //  kAgcModeFixedDigital 固定增益
         double startTime = now();
 
-        // agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeAdaptiveDigital);
-        agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeFixedDigital);
+        agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeAdaptiveDigital);
+        // agcProcess(inBuffer, sampleRate, inSampleCount, kAgcModeFixedDigital);
 
         double elapsed_time = calcElapsed(startTime, now());
 
