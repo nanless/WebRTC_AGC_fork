@@ -153,10 +153,10 @@ int agcProcess(int16_t *buffer, uint32_t sampleRate, size_t samplesCount, int16_
     if (buffer == nullptr) return -1;
     if (samplesCount == 0) return -1;
     WebRtcAgcConfig agcConfig;
-    agcConfig.compressionGaindB = 10; // default 9 dB
+    agcConfig.compressionGaindB = 8; // default 9 dB
     agcConfig.limiterEnable = 1; // default kAgcTrue (on)
     // agcConfig.limiterEnable = 0;
-    agcConfig.targetLevelDbfs = 8; // default 3 (-3 dBOv)
+    agcConfig.targetLevelDbfs = 9; // default 3 (-3 dBOv)
     int minLevel = 0;
     int maxLevel = 255;
     size_t samples = MIN(160, sampleRate / 100);

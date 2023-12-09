@@ -1,3 +1,4 @@
 *.wav
 *.pkf
 build
+*.csv
