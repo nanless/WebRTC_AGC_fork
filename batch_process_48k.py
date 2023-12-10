@@ -5,10 +5,10 @@ import soundfile as sf
 import librosa
 from glob import glob
 
-src_folder = "/root/codes/SIG-Challenge/ICASSP2024/blind_data"
+src_folder = "/data3/zhounan/codes/github_repos/SIG-Challenge/ICASSP2024/blind_data"
 temp_folder = "blind_data_16k"
 temp_folder2 = "blind_data_16k_agc"
-dst_folder = "blind_data_agc"
+dst_folder = "blind_data_agc_adaptive_gain0_target10"
 
 os.makedirs(temp_folder, exist_ok=True)
 os.makedirs(temp_folder2, exist_ok=True)

@@ -92,7 +92,7 @@ if __name__ == '__main__':
         Sample code to run the SigMOS estimator. 
         V1 (current model) is an alpha version and should be used in accordance.
     '''
-    model_dir = "/root/codes/SIG-Challenge/ICASSP2024/sigmos"
+    model_dir = "../SIG-Challenge/ICASSP2024/sigmos"
     data_dir = sys.argv[1]
     save_name = sys.argv[2]
     sigmos_estimator = SigMOS(model_dir=model_dir)
