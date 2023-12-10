@@ -153,7 +153,11 @@ int agcProcess(int16_t *buffer, uint32_t sampleRate, size_t samplesCount, int16_
     if (buffer == nullptr) return -1;
     if (samplesCount == 0) return -1;
     WebRtcAgcConfig agcConfig;
+<<<<<<< HEAD
     agcConfig.compressionGaindB = 0; // default 9 dB
+=======
+    agcConfig.compressionGaindB = 10; // default 9 dB
+>>>>>>> 05f3010e6897bf549e6a14f6444c550fe503cc9e
     agcConfig.limiterEnable = 1; // default kAgcTrue (on)
     // agcConfig.limiterEnable = 0;
     agcConfig.targetLevelDbfs = 10; // default 3 (-3 dBOv)
@@ -249,9 +253,9 @@ void auto_gain(char *in_file, char *out_file) {
  }
 
 int main(int argc, char *argv[]) {
-    printf("WebRTC Automatic Gain Control\n");
-    printf("博客:http://cpuimage.cnblogs.com/\n");
-    printf("音频自动增益\n");
+    // printf("WebRTC Automatic Gain Control\n");
+    // printf("博客:http://cpuimage.cnblogs.com/\n");
+    // printf("音频自动增益\n");
     if (argc < 3)
         return -1;
     char *in_file = argv[1];

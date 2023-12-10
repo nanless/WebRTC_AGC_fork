@@ -2,9 +2,9 @@
 
 # # Get the desired compression gain
 # read -p "Enter the desired compression gain (in dB): " compression_gain
-mkdir -p agc_exp_csvs
+mkdir -p agc_exp_csvs_new
 # Replace the existing value in main.c using sed with capture groups
-for compression_gain in `seq 0 15`; do
+for compression_gain in `seq 7 15`; do
     for targetLevelDbfs in `seq 3 9`; do
         sed -i -E "s/agcConfig.compressionGaindB = ([0-9]+\.?[0-9]*);/agcConfig.compressionGaindB = $compression_gain;/g" main.c
         sed -i -E "s/agcConfig.targetLevelDbfs = ([0-9]+\.?[0-9]*);/agcConfig.targetLevelDbfs = $targetLevelDbfs;/g" main.c
@@ -12,8 +12,11 @@ for compression_gain in `seq 0 15`; do
         cd build
         make
         cd ..
+        rm blind_data_16k/*
+        rm blind_data_16k_agc/*
+        rm blind_data_agc/*
         python batch_process_48k.py
-        python calc_folder_sigmos.py blind_data_agc agc_exp_csvs/gain${compression_gain}_target${targetLevelDbfs}.csv
+        python calc_folder_sigmos.py blind_data_agc agc_exp_csvs_new/gain${compression_gain}_target${targetLevelDbfs}.csv
     done
 done
 # # Check if the replacement was successful
